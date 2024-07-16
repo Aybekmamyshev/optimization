@@ -3,6 +3,7 @@ import Container from "../../component";
 import useFetch from "../../hook/useFetch";
 import styles from './hero.module.scss'
 import {Link} from "react-router-dom";
+import {api, endpoints} from "../../constants";
 
 
 
@@ -17,14 +18,13 @@ interface TypeData  {
     created: string
 }
 const Hero = () => {
-    const {error, loading, data} = useFetch<TypeData[]>('http://localhost:3001/characters')
+    const {error, loading, data} = useFetch<TypeData[]>(`${api}${endpoints.characters}`)
     return (
         <Container>
             <>
                 <h2 className={styles.title}> All heroes</h2>
 
                 <div className={styles.wrapper}>
-                    {loading && <p>...Loading</p>}
                     {error && <p>Ошибка</p>}
                     {data && !loading &&
                         data?.map((item) => (

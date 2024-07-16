@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 
 
 interface TypeFetch<T>  {
-    data: T | undefined,
+    data?: T,
     loading: boolean,
     error: string | null
 }

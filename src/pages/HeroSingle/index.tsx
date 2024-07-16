@@ -1,7 +1,8 @@
-import React from 'react';
-import {useParams} from "react-router-dom";
+import React, {Suspense} from 'react';
+import {useNavigate, useParams} from "react-router-dom";
 import useFetch from "../../hook/useFetch";
 import Container from "../../component";
+import {api, endpoints} from "../../constants";
 
 
 interface TypeFetch {
@@ -13,15 +14,19 @@ interface TypeFetch {
 }
 const HeroSingle = () => {
     const {id} = useParams()
-    const {data: item} = useFetch<TypeFetch>(`http://localhost:3001/episodes/${id}`)
+    const navigate = useNavigate()
+    const {data: item} = useFetch<TypeFetch>(`${api}${endpoints.characters}/${id}`)
     return (
-        <Container>
-            <div>
-                {
-                    <h2>{item?.name}</h2>
-                }
-            </div>
-        </Container>
+        <Suspense fallback={'Loading...'}>
+            <Container>
+                <div>
+                    <button onClick={() => navigate(-1)}>Назад</button>
+                    {
+                        <h2>{item?.name}</h2>
+                    }
+                </div>
+            </Container>
+        </Suspense>
     );
 };
 
