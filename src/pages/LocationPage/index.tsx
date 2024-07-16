@@ -1,39 +1,34 @@
-import React, {Suspense, useTransition} from 'react';
+import React, {useState} from 'react';
 import Container from "../../component";
-import useFetch from "../../hook/useFetch";
-import {useSearchParams} from "react-router-dom";
+import {useInfinityScroll} from "../../hook/useInfinityScroll";
 
-
-interface TypeLocation {
-    id: string,
-    name: string,
-    type: string,
-    dimension: string,
-    created: string
-}
 
 const Location = () => {
-    const {data} = useFetch<TypeLocation[]>('http://localhost:3001/locations');
-    const [search, setSearchParams] = useSearchParams({name: ''});
-    const nameQuery = search.get('name');
-    const [isPending, startTransition] = useTransition()
 
+    const [query, setQuery] = useState('');
+    const [page, setPage] = useState(1);
+
+    const {data, loading, error} = useInfinityScroll(query, page)
+
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setQuery(e.target.value)
+        setPage(1)
+    }
 
     return (
         <Container>
             <>
                 <h2 style={{textAlign: 'center'}}>All titles</h2>
-                <input type="text" value={nameQuery!} onChange={(e) => setSearchParams({name: e.target.value})}
+                <input type="text" value={query} onChange={handleChange}
                        name={'search'}/>
-
-
                 {
-
-                    data?.filter((filtered) => filtered.name.toUpperCase().includes(nameQuery!.toUpperCase())).map((item) => (
+                    data?.map((item) => (
                         <h2>{item.name}</h2>
-
                     ))
                 }
+                {loading && <div>Loading...</div>}
+                {error && <div>Error</div>}
 
 
             </>
