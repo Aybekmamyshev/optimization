@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import Context from "./hook/Context";
+import ErrorBoundary from "./hook/ErrorBoundary";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <Context>
-        <App/>
+        <ErrorBoundary>
+            <App/>
+        </ErrorBoundary>
     </Context>
 );
 
