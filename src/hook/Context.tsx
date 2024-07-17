@@ -13,13 +13,16 @@ interface TypeHooks {
     setUser: React.Dispatch<React.SetStateAction<null>>,
     register: (user: TypeUser, callback: () => void) => void;
     logOut: (callback: () => void) => void;
+    category: string,
+    setCategory: React.Dispatch<React.SetStateAction<string>>
 }
 
 
 export const CustomContext = createContext<TypeHooks | null>(null)
 const Context = ({children}: any) => {
 
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState(null);
+    const [category, setCategory] = useState('')
 
 
     const register = (user : any, callback: Function) => {
@@ -36,7 +39,9 @@ const Context = ({children}: any) => {
         user,
         register,
         logOut,
-        setUser
+        setUser,
+        category,
+        setCategory
     }
     return (
         <CustomContext.Provider value={value}>

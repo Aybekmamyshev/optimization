@@ -2,7 +2,7 @@ import React, {Suspense} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import useFetch from "../../hook/useFetch";
 import Container from "../../component";
-import {api, endpoints} from "../../constants";
+import {api} from "../../constants";
 
 
 interface TypeFetch {
@@ -15,7 +15,7 @@ interface TypeFetch {
 const HeroSingle = () => {
     const {id} = useParams()
     const navigate = useNavigate()
-    const {data: item} = useFetch<TypeFetch>(`${api}${endpoints.characters}/${id}`)
+    const {data: item} = useFetch<TypeFetch>(`${api}/${id}`)
     return (
         <Suspense fallback={'Loading...'}>
             <Container>

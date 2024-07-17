@@ -9,7 +9,7 @@ import {lazy, Suspense} from "react";
 const HomePage = lazy(() => import('./pages/HomePage'))
 const HeroPage = lazy(() => import('../src/pages/HeroPage'))
 const HeroSingle = lazy(() => import('../src/pages/HeroSingle'))
-const LocationPage = lazy(() => import('../src/pages/LocationPage'))
+const LocationPage = lazy(() => import('../src/pages/Location'))
 const EpisodePage = lazy(() => import('../src/pages/EpisodePage'))
 const NotFound = lazy(() => import('../src/pages/NotFound'))
 

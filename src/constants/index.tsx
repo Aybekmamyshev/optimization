@@ -1,5 +1,2 @@
 export const api = 'http://localhost:3003/'
-
-export enum endpoints  {
-    characters = 'characters'
-}
+export const BASE_URL = 'https://rickandmortyapi.com/api/'
